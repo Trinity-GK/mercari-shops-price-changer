@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mercari Shops Price Automation</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 id="title">Mercari Shops Price Automation</h1>
+    </header>
+    
+    <main>
+      <!-- Status Display -->
+      <div class="status" id="status">
+        <p id="statusText">Ready to start</p>
+      </div>
+
+      <!-- Setup Screen (shown once) -->
+      <div id="infoScreen" class="form-section" style="display: none;">
+        <div class="info-header">
+          <h2 id="infoTitle">Welcome to Mercari Shops Price Automation</h2>
+        </div>
+
+        <div class="info-content">
+          <div class="info-section">
+            <h3 id="howItWorksTitle">How It Works</h3>
+            <ul id="howItWorksList">
+              <li id="infoItem1">Automatically adjusts prices for all your shop products</li>
+              <li id="infoItem2">Excludes products with pending shipments (発送待ち)</li>
+              <li id="infoItem3">Restores original prices after a set time or when order threshold is reached</li>
+              <li id="infoItem4">Runs in the background without interfering with your browsing</li>
+            </ul>
+          </div>
+
+          <div class="info-section">
+            <h3 id="requirementsTitle">Requirements</h3>
+            <ul id="requirementsList">
+              <li id="reqItem1">You must be logged into mercari-shops.com in this browser</li>
+              <li id="reqItem2">The extension uses your browser session (no API tokens needed)</li>
+              <li id="reqItem3">Make sure you're logged in before starting automation</li>
+            </ul>
+          </div>
+
+          <form id="setupForm">
+            <div class="form-group">
+              <label for="shopId" id="shopIdLabel">Shop ID</label>
+              <input type="text" id="shopId" placeholder="Enter your Shop ID (e.g., XbbLgd8ehsPWW6LWQKPGzN)" required>
+              <small class="form-hint" id="shopIdHint">You can find your Shop ID in the URL when viewing your shop on mercari-shops.com</small>
+            </div>
+
+            <div class="info-note">
+              <p id="infoNote">This setup will only appear once. Your Shop ID will be saved for future use.</p>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="continueBtn" class="btn btn-primary">Save & Continue</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Configuration Form (shown when credentials are configured) -->
+      <div id="configForm" class="form-section" style="display: none;">
+        <form id="priceConfigForm">
+          <div class="form-group">
+            <label for="discountAmount" id="discountAmountLabel">Discount Amount (値下げ額)</label>
+            <input type="number" id="discountAmount" min="1" placeholder="Enter amount in JPY (e.g., 100, 200)" required>
+            <span class="input-suffix">JPY</span>
+          </div>
+
+          <div class="form-group">
+            <label for="restoreDelay" id="restoreDelayLabel">Restore Delay (元の価格に戻す時間)</label>
+            <input type="number" id="restoreDelay" min="1" placeholder="Time in minutes (e.g., 60)" required>
+            <span class="input-suffix">minutes</span>
+          </div>
+
+          <div class="form-group">
+            <label for="orderThreshold" id="orderThresholdLabel">Order Threshold (注文数)</label>
+            <input type="number" id="orderThreshold" min="1" placeholder="Number of orders to trigger restore (e.g., 3)" required>
+            <span class="input-suffix">orders</span>
+          </div>
+
+          <div class="form-group">
+            <label for="monitoringInterval" id="monitoringIntervalLabel">Order Monitoring Interval (監視頻度)</label>
+            <input type="number" id="monitoringInterval" min="5" placeholder="Polling interval in seconds (e.g., 30)" required>
+            <span class="input-suffix">seconds</span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="startBtn" class="btn btn-primary">Start Price Adjustment</button>
+            <button type="button" id="testPriceChangeBtn" class="btn btn-secondary">Test Price Change</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Test Price Change Modal -->
+      <div id="testPriceModal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="testPriceModalTitle">Test Price Change</h3>
+            <button type="button" id="closeTestModalBtn" class="modal-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="testProductId" id="testProductIdLabel">Product ID</label>
+              <input type="text" id="testProductId" placeholder="Enter product ID (e.g., 2JJZWcGWTWJreKUyXoqe7e)" required>
+              <small class="form-hint">Enter the ID of a product to test price change</small>
+            </div>
+            <div class="form-group">
+              <label for="testNewPrice" id="testNewPriceLabel">New Price (JPY)</label>
+              <input type="number" id="testNewPrice" min="300" placeholder="Enter new price" required>
+              <small class="form-hint">Minimum price is 300 JPY</small>
+            </div>
+            <div id="testPriceResult" class="test-result" style="display: none;">
+              <p id="testPriceResultText"></p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="cancelTestBtn" class="btn btn-secondary">Cancel</button>
+            <button type="button" id="executeTestBtn" class="btn btn-primary">Test Price Change</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Running Status (shown when active) -->
+      <div id="runningStatus" class="running-section" style="display: none;">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-label" id="productsProcessedLabel">Products processed</span>
+            <span class="stat-value" id="productsProcessedValue">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label" id="productsAdjustedLabel">Products adjusted</span>
+            <span class="stat-value" id="productsAdjustedValue">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label" id="productsExcludedLabel">Products excluded (発送待ち)</span>
+            <span class="stat-value" id="productsExcludedValue">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label" id="newOrdersLabel">New orders since start</span>
+            <span class="stat-value" id="newOrdersValue">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label" id="timeRemainingLabel">Time remaining</span>
+            <span class="stat-value" id="timeRemainingValue">--</span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="stopBtn" class="btn btn-danger">Stop & Restore Prices</button>
+        </div>
+      </div>
+
+      <!-- Error Display -->
+      <div id="errorDisplay" class="error-message" style="display: none;">
+        <p id="errorText"></p>
+      </div>
+    </main>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "mercari-price-changer-extension",
+  "version": "1.0.0",
+  "description": "A Firefox extension built with WebExtensions API",
+  "scripts": {
+    "start": "web-ext run",
+    "build": "web-ext build",
+    "lint": "web-ext lint",
+    "test": "node tests/test-runner.js"
+  },
+  "keywords": [
+    "firefox",
+    "extension",
+    "webextensions"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "web-ext": "^7.8.0"
+  }
+}
+

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="testPageTitle">メルカリShops API テスト</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: #0060df;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .test-section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      background: #fafafa;
+    }
+
+    .test-section h2 {
+      margin-bottom: 15px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .test-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .test-controls input {
+      padding: 8px 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .test-controls input[type="text"],
+    .test-controls input[type="number"] {
+      min-width: 200px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-primary {
+      background: #0060df;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0050c8;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #5a6268;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .test-result {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .test-result.success {
+      background: #f0f8f0;
+      border: 1px solid #00a000;
+      color: #006600;
+    }
+
+    .test-result.error {
+      background: #fff5f5;
+      border: 1px solid #d70022;
+      color: #d70022;
+    }
+
+    .test-result.pending {
+      background: #f5f5f5;
+      border: 1px solid #888;
+      color: #666;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .status-badge.success {
+      background: #00a000;
+      color: white;
+    }
+
+    .status-badge.error {
+      background: #d70022;
+      color: white;
+    }
+
+    .status-badge.pending {
+      background: #888;
+      color: white;
+    }
+
+    .info-box {
+      background: #e6f3ff;
+      border-left: 4px solid #0060df;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+
+    .info-box p {
+      margin: 0;
+      font-size: 13px;
+      color: #0060df;
+    }
+
+    .run-all-btn {
+      margin-bottom: 30px;
+      padding: 12px 24px;
+      font-size: 16px;
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="testPageTitleH1">メルカリShops API テスト</h1>
+    <p class="subtitle" id="testPageSubtitle">拡張機能のすべてのAPI機能をテスト</p>
+
+    <div class="info-box">
+      <p id="testPageNote"><strong>注意:</strong> mercari-shops.comにログインし、Shop IDの初期設定を完了していることを確認してください。</p>
+    </div>
+
+    <button id="runAllBtn" class="btn btn-primary run-all-btn">すべてのテストを実行</button>
+
+    <div class="test-grid">
+      <!-- Test 1: Connection Test -->
+      <div class="test-section">
+        <h2 id="test1Title">1. 接続テスト</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 10px;" id="test1Desc">Selfクエリを使用してAPI接続をテスト</p>
+        <div class="test-controls">
+          <button id="testConnectionBtn" class="btn btn-primary">接続テスト</button>
+        </div>
+        <div id="testConnectionResult" class="test-result" style="display: none;"></div>
+      </div>
+
+      <!-- Test 2: Get Shop ID -->
+      <div class="test-section">
+        <h2 id="test2Title">2. Shop IDを取得</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 10px;" id="test2Desc">APIまたはストレージからShop IDを取得</p>
+        <div class="test-controls">
+          <button id="testGetShopIdBtn" class="btn btn-primary">Shop IDを取得</button>
+        </div>
+        <div id="testGetShopIdResult" class="test-result" style="display: none;"></div>
+      </div>
+
+      <!-- Test 3: Get Products -->
+      <div class="test-section">
+        <h2 id="test3Title">3. 商品を取得</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 10px;" id="test3Desc">ショップから商品を取得</p>
+        <div class="test-controls">
+          <input type="number" id="productsLimit" placeholder="制限（デフォルト: 10）" value="10" min="1" max="100">
+          <button id="testGetProductsBtn" class="btn btn-primary">商品を取得</button>
+        </div>
+        <div id="testGetProductsResult" class="test-result" style="display: none;"></div>
+      </div>
+
+      <!-- Test 4: Get Orders -->
+      <div class="test-section">
+        <h2 id="test4Title">4. 注文を取得</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 10px;" id="test4Desc">ショップから注文を取得</p>
+        <div class="test-controls">
+          <input type="number" id="ordersLimit" placeholder="制限（デフォルト: 10）" value="10" min="1" max="100">
+          <button id="testGetOrdersBtn" class="btn btn-primary">注文を取得</button>
+        </div>
+        <div id="testGetOrdersResult" class="test-result" style="display: none;"></div>
+      </div>
+
+      <!-- Test 5: Get Orders Waiting for Shipment -->
+      <div class="test-section">
+        <h2 id="test5Title">5. 発送待ち注文を取得</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 10px;" id="test5Desc">STATUS_WAITING_SHIPPINGの注文を取得</p>
+        <div class="test-controls">
+          <button id="testGetOrdersWaitingBtn" class="btn btn-primary">発送待ち注文を取得</button>
+        </div>
+        <div id="testGetOrdersWaitingResult" class="test-result" style="display: none;"></div>
+      </div>
+
+      <!-- Test 6: Get Product Details -->
+      <div class="test-section">
+        <h2 id="test6Title">6. 商品詳細を取得</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 10px;" id="test6Desc">編集用の完全な商品詳細を取得</p>
+        <div class="test-controls">
+          <input type="text" id="productIdInput" placeholder="商品ID" value="">
+          <button id="testGetProductDetailsBtn" class="btn btn-primary">商品詳細を取得</button>
+        </div>
+        <div id="testGetProductDetailsResult" class="test-result" style="display: none;"></div>
+      </div>
+
+      <!-- Test 7: Update Product Price -->
+      <div class="test-section">
+        <h2 id="test7Title">7. 価格を更新</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 10px;" id="test7Desc">価格更新機能をテスト</p>
+        <div class="test-controls">
+          <input type="text" id="updateProductIdInput" placeholder="商品ID" value="">
+          <input type="number" id="updatePriceInput" placeholder="新しい価格（円）" value="" min="300">
+          <button id="testUpdatePriceBtn" class="btn btn-primary">価格を更新</button>
+        </div>
+        <div id="testUpdatePriceResult" class="test-result" style="display: none;"></div>
+      </div>
+    </div>
+
+    <!-- Gherkin Scenario Tests Section -->
+    <div style="margin-top: 40px; padding-top: 30px; border-top: 2px solid #e0e0e0;">
+      <h1 style="margin-bottom: 20px; color: #0060df;" id="gherkinTestsTitle">Gherkinシナリオテスト</h1>
+      <p class="subtitle" id="gherkinTestsSubtitle">ライブ価格変更とカウントダウンタイマーを使用して実際の自動化シナリオを実行</p>
+
+      <div class="info-box" style="background: #fff3cd; border-left-color: #ffc107;">
+        <p id="gherkinTestsWarning"><strong>⚠️ 警告:</strong> これらのテストは実際にメルカリShopsアカウントの商品価格を変更します。注意して使用してください！</p>
+      </div>
+
+      <!-- Scenario Test 1: Standard Price Adjustment -->
+      <div class="test-section" style="background: #fff; border: 2px solid #0060df;">
+        <h2 id="scenario1Title">シナリオ1: 標準価格調整</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 15px;" id="scenario1Desc">
+          標準的な値下げ計算をテストします。商品は値下げされ、遅延後に復元されます。
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+          <div>
+            <label for="scenario1Discount" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">値下げ額（円）</label>
+            <input type="number" id="scenario1Discount" placeholder="100" value="100" min="1" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px;">
+            <small style="color: #666; font-size: 11px;">各商品の値下げ額</small>
+          </div>
+          <div>
+            <label for="scenario1RestoreDelay" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">復元遅延（分）</label>
+            <input type="number" id="scenario1RestoreDelay" placeholder="2" value="2" min="1" max="60" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px;">
+            <small style="color: #666; font-size: 11px;">価格が自動的に復元されるまでの時間</small>
+          </div>
+          <div>
+            <label for="scenario1OrderThreshold" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">注文閾値</label>
+            <input type="number" id="scenario1OrderThreshold" placeholder="3" value="3" min="0" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px;">
+            <small style="color: #666; font-size: 11px;">早期復元をトリガーする新しい注文数</small>
+          </div>
+          <div>
+            <label for="scenario1MonitoringInterval" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">監視間隔（秒）</label>
+            <input type="number" id="scenario1MonitoringInterval" placeholder="30" value="30" min="5" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px;">
+            <small style="color: #666; font-size: 11px;">新しい注文をチェックする頻度（秒単位）</small>
+          </div>
+        </div>
+        <div class="test-controls">
+          <button id="runScenario1Btn" class="btn btn-primary">シナリオを実行 1</button>
+          <button id="stopScenario1Btn" class="btn btn-secondary" style="display: none;">停止して復元</button>
+        </div>
+        <div id="scenario1Status" style="margin-top: 15px; padding: 15px; background: #f5f5f5; border-radius: 4px; display: none;">
+          <div id="scenario1StatusText" style="font-weight: 600; margin-bottom: 10px;"></div>
+          <div id="scenario1Countdown" style="font-size: 24px; color: #0060df; font-weight: bold; margin: 10px 0;"></div>
+          <div id="scenario1Progress" style="margin-top: 15px;">
+            <div style="font-weight: 600; margin-bottom: 5px;">進捗:</div>
+            <div id="scenario1ProgressText" style="font-size: 13px; color: #666;"></div>
+          </div>
+          <div id="scenario1Products" style="margin-top: 15px; max-height: 300px; overflow-y: auto;">
+            <div style="font-weight: 600; margin-bottom: 5px;">商品:</div>
+            <div id="scenario1ProductsList" style="font-size: 12px; font-family: monospace;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario Test 2: Minimum Price Floor (300 yen) -->
+      <div class="test-section" style="background: #fff; border: 2px solid #ffc107;">
+        <h2 id="scenario2Title">シナリオ2: 最低価格（300円）の反転動作</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 15px;" id="scenario2Desc">
+          300円を下回る商品をテストします - 値下げではなく値上げされる必要があります。
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+          <div>
+            <label for="scenario2Discount" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">値下げ額（円）</label>
+            <input type="number" id="scenario2Discount" placeholder="100" value="100" min="1" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px;">
+            <small style="color: #666; font-size: 11px;">300円を下回る商品はこの金額だけ値上げされます</small>
+          </div>
+          <div>
+            <label for="scenario2RestoreDelay" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">復元遅延（分）</label>
+            <input type="number" id="scenario2RestoreDelay" placeholder="2" value="2" min="1" max="60" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px;">
+            <small style="color: #666; font-size: 11px;">価格が自動的に復元されるまでの時間</small>
+          </div>
+        </div>
+        <div class="test-controls">
+          <button id="runScenario2Btn" class="btn btn-primary">シナリオを実行 2</button>
+          <button id="stopScenario2Btn" class="btn btn-secondary" style="display: none;">停止して復元</button>
+        </div>
+        <div id="scenario2Status" style="margin-top: 15px; padding: 15px; background: #f5f5f5; border-radius: 4px; display: none;">
+          <div id="scenario2StatusText" style="font-weight: 600; margin-bottom: 10px;"></div>
+          <div id="scenario2Countdown" style="font-size: 24px; color: #ffc107; font-weight: bold; margin: 10px 0;"></div>
+          <div id="scenario2Products" style="margin-top: 15px; max-height: 300px; overflow-y: auto;">
+            <div style="font-weight: 600; margin-bottom: 5px;">商品（価格反転を表示）:</div>
+            <div id="scenario2ProductsList" style="font-size: 12px; font-family: monospace;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario Test 3: Product Exclusion -->
+      <div class="test-section" style="background: #fff; border: 2px solid #28a745;">
+        <h2 id="scenario3Title">シナリオ3: 商品除外（発送待ち）</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 15px;" id="scenario3Desc">
+          「発送待ち」ステータスの注文がある商品が価格変更から除外されることをテストします。
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+          <div>
+            <label for="scenario3Discount" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">値下げ額（円）</label>
+            <input type="number" id="scenario3Discount" placeholder="100" value="100" min="1" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px;">
+            <small style="color: #666; font-size: 11px;">対象商品の値下げ額</small>
+          </div>
+          <div>
+            <label for="scenario3RestoreDelay" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">復元遅延（分）</label>
+            <input type="number" id="scenario3RestoreDelay" placeholder="2" value="2" min="1" max="60" style="width: 100%; padding: 8px; border: 1px solid #d0d0d0; border-radius: 4px;">
+            <small style="color: #666; font-size: 11px;">価格が自動的に復元されるまでの時間</small>
+          </div>
+        </div>
+        <div class="test-controls">
+          <button id="runScenario3Btn" class="btn btn-primary">シナリオを実行 3</button>
+          <button id="stopScenario3Btn" class="btn btn-secondary" style="display: none;">停止して復元</button>
+        </div>
+        <div id="scenario3Status" style="margin-top: 15px; padding: 15px; background: #f5f5f5; border-radius: 4px; display: none;">
+          <div id="scenario3StatusText" style="font-weight: 600; margin-bottom: 10px;"></div>
+          <div id="scenario3Countdown" style="font-size: 24px; color: #28a745; font-weight: bold; margin: 10px 0;"></div>
+          <div id="scenario3Products" style="margin-top: 15px; max-height: 300px; overflow-y: auto;">
+            <div style="font-weight: 600; margin-bottom: 5px;">除外された商品（変更されないはず）:</div>
+            <div id="scenario3ExcludedList" style="font-size: 12px; font-family: monospace; color: #28a745;"></div>
+            <div style="font-weight: 600; margin-top: 15px; margin-bottom: 5px;">調整された商品:</div>
+            <div id="scenario3AdjustedList" style="font-size: 12px; font-family: monospace;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="test.js"></script>
+  <script src="test-gherkin.js"></script>
+</body>
+</html>
+

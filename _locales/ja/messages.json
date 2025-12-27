@@ -1,0 +1,297 @@
+{
+  "extensionName": {
+    "message": "メルカリShops価格自動化"
+  },
+  "extensionDescription": {
+    "message": "メルカリShops商品の一括価格調整を自動化"
+  },
+  "configTitle": {
+    "message": "価格自動化設定"
+  },
+  "discountAmountLabel": {
+    "message": "値下げ額"
+  },
+  "discountAmountPlaceholder": {
+    "message": "円単位で入力（例：100、200）"
+  },
+  "restoreDelayLabel": {
+    "message": "元の価格に戻す時間"
+  },
+  "restoreDelayPlaceholder": {
+    "message": "分数で入力（例：60）"
+  },
+  "orderThresholdLabel": {
+    "message": "注文数"
+  },
+  "orderThresholdPlaceholder": {
+    "message": "復元をトリガーする注文数（例：3）"
+  },
+  "monitoringIntervalLabel": {
+    "message": "監視頻度"
+  },
+  "monitoringIntervalPlaceholder": {
+    "message": "ポーリング間隔（分）（例：5）"
+  },
+  "apiTokenLabel": {
+    "message": "APIアクセストークン"
+  },
+  "apiTokenPlaceholder": {
+    "message": "個人APIアクセストークンを入力"
+  },
+  "apiClientNameLabel": {
+    "message": "APIクライアント名"
+  },
+  "apiClientNamePlaceholder": {
+    "message": "APIクライアント名（例：EXAMPLE_SHOP）"
+  },
+  "startButton": {
+    "message": "価格調整を開始"
+  },
+  "stopButton": {
+    "message": "停止して価格を復元"
+  },
+  "statusIdle": {
+    "message": "開始準備完了"
+  },
+  "statusRunning": {
+    "message": "価格調整実行中"
+  },
+  "statusPhaseA": {
+    "message": "フェーズA：価格調整中..."
+  },
+  "statusPhaseB": {
+    "message": "フェーズB：注文監視中..."
+  },
+  "statusRestoring": {
+    "message": "価格復元中..."
+  },
+  "statusComplete": {
+    "message": "価格調整完了"
+  },
+  "errorInvalidInput": {
+    "message": "すべての必須項目に有効な値を入力してください"
+  },
+  "errorApiToken": {
+    "message": "APIトークンが必要です"
+  },
+  "errorApiClientName": {
+    "message": "APIクライアント名が必要です"
+  },
+  "productsProcessed": {
+    "message": "処理済み商品"
+  },
+  "productsAdjusted": {
+    "message": "調整済み商品"
+  },
+  "productsExcluded": {
+    "message": "除外商品（発送待ち）"
+  },
+  "newOrdersCount": {
+    "message": "開始後の新規注文数"
+  },
+  "timeRemaining": {
+    "message": "残り時間"
+  },
+  "minutes": {
+    "message": "分"
+  },
+  "infoTitle": {
+    "message": "メルカリShops価格自動化へようこそ"
+  },
+  "howItWorksTitle": {
+    "message": "使い方"
+  },
+  "infoItem1": {
+    "message": "ショップ内の全商品の価格を自動調整します"
+  },
+  "infoItem2": {
+    "message": "発送待ちの商品は除外されます"
+  },
+  "infoItem3": {
+    "message": "設定した時間経過後、または注文数が閾値に達したら元の価格に戻します"
+  },
+  "infoItem4": {
+    "message": "バックグラウンドで動作し、ブラウジングを妨げません"
+  },
+  "requirementsTitle": {
+    "message": "要件"
+  },
+  "reqItem1": {
+    "message": "このブラウザでmercari-shops.comにログインしている必要があります"
+  },
+  "reqItem2": {
+    "message": "拡張機能はブラウザのセッションを使用します（APIトークンは不要）"
+  },
+  "reqItem3": {
+    "message": "自動化を開始する前にログインしていることを確認してください"
+  },
+  "infoNote": {
+    "message": "この設定は一度だけ表示されます。ショップIDは今後の使用のために保存されます。"
+  },
+  "shopIdLabel": {
+    "message": "ショップID"
+  },
+  "shopIdPlaceholder": {
+    "message": "ショップIDを入力（例：XbbLgd8ehsPWW6LWQKPGzN）"
+  },
+  "shopIdHint": {
+    "message": "mercari-shops.comでショップを表示しているときのURLからショップIDを確認できます"
+  },
+  "saveAndContinueButton": {
+    "message": "保存して続行"
+  },
+  "errorShopIdRequired": {
+    "message": "ショップIDが必要です"
+  },
+  "saveButton": {
+    "message": "保存して続行"
+  },
+  "editCredentialsButton": {
+    "message": "認証情報を編集"
+  },
+  "credentialsSaved": {
+    "message": "認証情報が正常に保存されました"
+  },
+  "errorSavingCredentials": {
+    "message": "認証情報の保存に失敗しました"
+  },
+  "ipRegistrationInfo": {
+    "message": "IPアドレス登録が必要です"
+  },
+  "ipRegistrationDescription": {
+    "message": "APIを使用する前に、メルカリShops管理画面でIPアドレスを登録する必要があります。設定 → API設定 → IPホワイトリストに移動してください。"
+  },
+  "getMyIp": {
+    "message": "自分のIPアドレスを取得"
+  },
+  "useWebEndpointLabel": {
+    "message": "Webエンドポイントを使用（IPホワイトリストをバイパス - mercari-shops.comへのログインが必要）"
+  },
+  "testConnectionButton": {
+    "message": "接続をテスト"
+  },
+  "testingConnection": {
+    "message": "テスト中..."
+  },
+  "connectionTestSuccess": {
+    "message": "接続成功！"
+  },
+  "connectionTestFailed": {
+    "message": "接続に失敗しました"
+  },
+  "testPriceChangeButton": {
+    "message": "価格変更をテスト"
+  },
+  "testPriceModalTitle": {
+    "message": "価格変更をテスト"
+  },
+  "testProductIdLabel": {
+    "message": "商品ID"
+  },
+  "testNewPriceLabel": {
+    "message": "新しい価格（円）"
+  },
+  "executeTestButton": {
+    "message": "価格変更をテスト"
+  },
+  "cancelButton": {
+    "message": "キャンセル"
+  },
+  "testingPriceChange": {
+    "message": "テスト中..."
+  },
+  "testPriceChangeSuccess": {
+    "message": "価格の変更に成功しました！"
+  },
+  "testPriceChangeFailed": {
+    "message": "価格の変更に失敗しました"
+  },
+  "testPageTitle": {
+    "message": "メルカリShops API テスト"
+  },
+  "testPageSubtitle": {
+    "message": "拡張機能のすべてのAPI機能をテスト"
+  },
+  "testPageNote": {
+    "message": "注意: mercari-shops.comにログインし、Shop IDの初期設定を完了していることを確認してください。"
+  },
+  "runAllTests": {
+    "message": "すべてのテストを実行"
+  },
+  "testConnection": {
+    "message": "接続テスト"
+  },
+  "testConnectionDesc": {
+    "message": "Selfクエリを使用してAPI接続をテスト"
+  },
+  "getShopId": {
+    "message": "Shop IDを取得"
+  },
+  "getShopIdDesc": {
+    "message": "APIまたはストレージからShop IDを取得"
+  },
+  "getProducts": {
+    "message": "商品を取得"
+  },
+  "getProductsDesc": {
+    "message": "ショップから商品を取得"
+  },
+  "getOrders": {
+    "message": "注文を取得"
+  },
+  "getOrdersDesc": {
+    "message": "ショップから注文を取得"
+  },
+  "getOrdersWaiting": {
+    "message": "発送待ち注文を取得"
+  },
+  "getOrdersWaitingDesc": {
+    "message": "STATUS_WAITING_SHIPPINGの注文を取得"
+  },
+  "getProductDetails": {
+    "message": "商品詳細を取得"
+  },
+  "getProductDetailsDesc": {
+    "message": "編集用の完全な商品詳細を取得"
+  },
+  "updateProductPrice": {
+    "message": "価格を更新"
+  },
+  "updateProductPriceDesc": {
+    "message": "価格更新機能をテスト"
+  },
+  "gherkinTestsTitle": {
+    "message": "Gherkinシナリオテスト"
+  },
+  "gherkinTestsSubtitle": {
+    "message": "ライブ価格変更とカウントダウンタイマーを使用して実際の自動化シナリオを実行"
+  },
+  "gherkinTestsWarning": {
+    "message": "⚠️ 警告: これらのテストは実際にメルカリShopsアカウントの商品価格を変更します。注意して使用してください！"
+  },
+  "scenario1Title": {
+    "message": "シナリオ1: 標準価格調整"
+  },
+  "scenario1Desc": {
+    "message": "標準的な値下げ計算をテストします。商品は値下げされ、遅延後に復元されます。"
+  },
+  "scenario2Title": {
+    "message": "シナリオ2: 最低価格（300円）の反転動作"
+  },
+  "scenario2Desc": {
+    "message": "300円を下回る商品をテストします - 値下げではなく値上げされる必要があります。"
+  },
+  "scenario3Title": {
+    "message": "シナリオ3: 商品除外（発送待ち）"
+  },
+  "scenario3Desc": {
+    "message": "「発送待ち」ステータスの注文がある商品が価格変更から除外されることをテストします。"
+  },
+  "runScenario": {
+    "message": "シナリオを実行"
+  },
+  "stopAndRestore": {
+    "message": "停止して復元"
+  }
+}
+

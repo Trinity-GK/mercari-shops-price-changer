@@ -1,0 +1,297 @@
+{
+  "extensionName": {
+    "message": "Mercari Shops Price Automation"
+  },
+  "extensionDescription": {
+    "message": "Automate bulk price adjustments for Mercari Shops products"
+  },
+  "configTitle": {
+    "message": "Price Automation Configuration"
+  },
+  "discountAmountLabel": {
+    "message": "Discount Amount (値下げ額)"
+  },
+  "discountAmountPlaceholder": {
+    "message": "Enter amount in JPY (e.g., 100, 200)"
+  },
+  "restoreDelayLabel": {
+    "message": "Restore Delay (元の価格に戻す時間)"
+  },
+  "restoreDelayPlaceholder": {
+    "message": "Time in minutes (e.g., 60)"
+  },
+  "orderThresholdLabel": {
+    "message": "Order Threshold (注文数)"
+  },
+  "orderThresholdPlaceholder": {
+    "message": "Number of orders to trigger restore (e.g., 3)"
+  },
+  "monitoringIntervalLabel": {
+    "message": "Order Monitoring Interval (監視頻度)"
+  },
+  "monitoringIntervalPlaceholder": {
+    "message": "Polling interval in minutes (e.g., 5)"
+  },
+  "apiTokenLabel": {
+    "message": "API Access Token"
+  },
+  "apiTokenPlaceholder": {
+    "message": "Enter your Personal API Access Token"
+  },
+  "apiClientNameLabel": {
+    "message": "API Client Name"
+  },
+  "apiClientNamePlaceholder": {
+    "message": "Your API client name (e.g., EXAMPLE_SHOP)"
+  },
+  "startButton": {
+    "message": "Start Price Adjustment"
+  },
+  "stopButton": {
+    "message": "Stop & Restore Prices"
+  },
+  "statusIdle": {
+    "message": "Ready to start"
+  },
+  "statusRunning": {
+    "message": "Price adjustment in progress"
+  },
+  "statusPhaseA": {
+    "message": "Phase A: Adjusting prices..."
+  },
+  "statusPhaseB": {
+    "message": "Phase B: Monitoring orders..."
+  },
+  "statusRestoring": {
+    "message": "Restoring prices..."
+  },
+  "statusComplete": {
+    "message": "Price adjustment complete"
+  },
+  "errorInvalidInput": {
+    "message": "Please fill in all required fields with valid values"
+  },
+  "errorApiToken": {
+    "message": "API token is required"
+  },
+  "errorApiClientName": {
+    "message": "API client name is required"
+  },
+  "productsProcessed": {
+    "message": "Products processed"
+  },
+  "productsAdjusted": {
+    "message": "Products adjusted"
+  },
+  "productsExcluded": {
+    "message": "Products excluded (発送待ち)"
+  },
+  "newOrdersCount": {
+    "message": "New orders since start"
+  },
+  "timeRemaining": {
+    "message": "Time remaining"
+  },
+  "minutes": {
+    "message": "minutes"
+  },
+  "infoTitle": {
+    "message": "Welcome to Mercari Shops Price Automation"
+  },
+  "howItWorksTitle": {
+    "message": "How It Works"
+  },
+  "infoItem1": {
+    "message": "Automatically adjusts prices for all your shop products"
+  },
+  "infoItem2": {
+    "message": "Excludes products with pending shipments (発送待ち)"
+  },
+  "infoItem3": {
+    "message": "Restores original prices after a set time or when order threshold is reached"
+  },
+  "infoItem4": {
+    "message": "Runs in the background without interfering with your browsing"
+  },
+  "requirementsTitle": {
+    "message": "Requirements"
+  },
+  "reqItem1": {
+    "message": "You must be logged into mercari-shops.com in this browser"
+  },
+  "reqItem2": {
+    "message": "The extension uses your browser session (no API tokens needed)"
+  },
+  "reqItem3": {
+    "message": "Make sure you're logged in before starting automation"
+  },
+  "infoNote": {
+    "message": "This setup will only appear once. Your Shop ID will be saved for future use."
+  },
+  "shopIdLabel": {
+    "message": "Shop ID"
+  },
+  "shopIdPlaceholder": {
+    "message": "Enter your Shop ID (e.g., XbbLgd8ehsPWW6LWQKPGzN)"
+  },
+  "shopIdHint": {
+    "message": "You can find your Shop ID in the URL when viewing your shop on mercari-shops.com"
+  },
+  "saveAndContinueButton": {
+    "message": "Save & Continue"
+  },
+  "errorShopIdRequired": {
+    "message": "Shop ID is required"
+  },
+  "saveButton": {
+    "message": "Save & Continue"
+  },
+  "editCredentialsButton": {
+    "message": "Edit Credentials"
+  },
+  "credentialsSaved": {
+    "message": "Credentials saved successfully"
+  },
+  "errorSavingCredentials": {
+    "message": "Failed to save credentials"
+  },
+  "ipRegistrationInfo": {
+    "message": "IP Address Registration Required"
+  },
+  "ipRegistrationDescription": {
+    "message": "Your IP address must be registered in the Mercari Shops admin panel before using the API. Go to Settings → API Settings → IP Whitelist."
+  },
+  "getMyIp": {
+    "message": "Get My IP Address"
+  },
+  "useWebEndpointLabel": {
+    "message": "Use web endpoint (bypasses IP whitelist - requires login to mercari-shops.com)"
+  },
+  "testConnectionButton": {
+    "message": "Test Connection"
+  },
+  "testingConnection": {
+    "message": "Testing..."
+  },
+  "connectionTestSuccess": {
+    "message": "Connection successful!"
+  },
+  "connectionTestFailed": {
+    "message": "Connection failed"
+  },
+  "testPriceChangeButton": {
+    "message": "Test Price Change"
+  },
+  "testPriceModalTitle": {
+    "message": "Test Price Change"
+  },
+  "testProductIdLabel": {
+    "message": "Product ID"
+  },
+  "testNewPriceLabel": {
+    "message": "New Price (JPY)"
+  },
+  "executeTestButton": {
+    "message": "Test Price Change"
+  },
+  "cancelButton": {
+    "message": "Cancel"
+  },
+  "testingPriceChange": {
+    "message": "Testing..."
+  },
+  "testPriceChangeSuccess": {
+    "message": "Price successfully changed!"
+  },
+  "testPriceChangeFailed": {
+    "message": "Price change failed"
+  },
+  "testPageTitle": {
+    "message": "Mercari Shops API Tester"
+  },
+  "testPageSubtitle": {
+    "message": "Test all API functionality for the extension"
+  },
+  "testPageNote": {
+    "message": "Note: Make sure you're logged into mercari-shops.com and have completed the initial setup with your Shop ID."
+  },
+  "runAllTests": {
+    "message": "Run All Tests"
+  },
+  "testConnection": {
+    "message": "Test Connection"
+  },
+  "testConnectionDesc": {
+    "message": "Tests API connection using Self query"
+  },
+  "getShopId": {
+    "message": "Get Shop ID"
+  },
+  "getShopIdDesc": {
+    "message": "Gets shop ID from API or storage"
+  },
+  "getProducts": {
+    "message": "Get Products"
+  },
+  "getProductsDesc": {
+    "message": "Fetches products from shop"
+  },
+  "getOrders": {
+    "message": "Get Orders"
+  },
+  "getOrdersDesc": {
+    "message": "Fetches orders from shop"
+  },
+  "getOrdersWaiting": {
+    "message": "Get Orders Waiting"
+  },
+  "getOrdersWaitingDesc": {
+    "message": "Fetches orders with STATUS_WAITING_SHIPPING"
+  },
+  "getProductDetails": {
+    "message": "Get Product Details"
+  },
+  "getProductDetailsDesc": {
+    "message": "Gets full product details for editing"
+  },
+  "updateProductPrice": {
+    "message": "Update Price"
+  },
+  "updateProductPriceDesc": {
+    "message": "Tests price update functionality"
+  },
+  "gherkinTestsTitle": {
+    "message": "Gherkin Scenario Tests"
+  },
+  "gherkinTestsSubtitle": {
+    "message": "Run real automation scenarios with live price changes and countdown timers"
+  },
+  "gherkinTestsWarning": {
+    "message": "⚠️ Warning: These tests will actually change product prices on your Mercari Shops account. Use with caution!"
+  },
+  "scenario1Title": {
+    "message": "Scenario 1: Standard Price Adjustment"
+  },
+  "scenario1Desc": {
+    "message": "Tests standard discount calculation. Products will be discounted and then restored after the delay."
+  },
+  "scenario2Title": {
+    "message": "Scenario 2: Minimum Price Floor (300 yen) Inverted Behavior"
+  },
+  "scenario2Desc": {
+    "message": "Tests products that would go below 300 yen - they should be increased instead of discounted."
+  },
+  "scenario3Title": {
+    "message": "Scenario 3: Product Exclusion (発送待ち)"
+  },
+  "scenario3Desc": {
+    "message": "Tests that products with orders in \"Waiting for shipment\" status are excluded from price changes."
+  },
+  "runScenario": {
+    "message": "Run Scenario"
+  },
+  "stopAndRestore": {
+    "message": "Stop & Restore"
+  }
+}
+
